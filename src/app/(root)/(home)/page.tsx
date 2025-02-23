@@ -11,7 +11,6 @@ import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
 import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
-import DashboardPage from "@/app/(admin)/dashboard/page";
 import HeroSection from "@/components/Hero";
 
 export default function Home() {
