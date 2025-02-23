@@ -11,6 +11,8 @@ import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
 import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
+import DashboardPage from "@/app/(admin)/dashboard/page";
+import HeroSection from "@/components/Hero";
 
 export default function Home() {
   const router = useRouter();
@@ -38,8 +40,10 @@ export default function Home() {
   if (isLoading) return <LoaderUI />;
 
   return (
+    
     <div className="container max-w-7xl mx-auto p-6">
       {/* WELCOME SECTION */}
+      <HeroSection/>
       <div className="rounded-lg bg-card p-6 border shadow-sm mb-10">
       <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-500 to-fuchsia-500 bg-clip-text text-transparent">
   Welcome back {name}!
@@ -51,7 +55,7 @@ export default function Home() {
             : "Access your upcoming interviews and preparations"}
         </p>
       </div>
-
+    
       {isInterviewer ? (
         <>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -70,33 +74,47 @@ export default function Home() {
             title={modalType === "join" ? "Join Meeting" : "Start Meeting"}
             isJoinMeeting={modalType === "join"}
           />
+          
         </>
       ) : (
         <>
-          <div>
-            <h1 className="text-3xl font-bold">Your Interviews</h1>
-            <p className="text-muted-foreground mt-1">View and join your scheduled interviews</p>
-          </div>
+  {/* Header Section */}
+  <div className="text-center md:text-left">
+    <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+      Your Interviews
+    </h1>
+    <p className="text-lg text-muted-foreground mt-2">
+      View and join your scheduled interviews
+    </p>
+  </div>
 
-          <div className="mt-8">
-            {interviews === undefined ? (
-              <div className="flex justify-center py-12">
-                <Loader2Icon className="h-8 w-8 animate-spin text-muted-foreground" />
-              </div>
-            ) : interviews.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {interviews.map((interview) => (
-                  <MeetingCard key={interview._id} interview={interview} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12 text-muted-foreground">
-                You have no scheduled interviews at the moment
-              </div>
-            )}
-          </div>
-        </>
+  {/* Interview List Section */}
+  <div className="mt-10">
+    {interviews === undefined ? (
+      // Loader when interviews are loading
+      <div className="flex justify-center items-center py-16">
+        <Loader2Icon className="h-10 w-10 animate-spin text-muted-foreground" />
+      </div>
+    ) : interviews.length > 0 ? (
+      // Grid layout for interview cards
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {interviews.map((interview) => (
+          <MeetingCard key={interview._id} interview={interview} />
+        ))}
+      </div>
+    ) : (
+      // Message when no interviews are found
+      <div className="flex flex-col items-center justify-center text-center py-16">
+        <p className="text-lg text-muted-foreground">
+          🚀 You have no scheduled interviews at the moment
+        </p>
+      </div>
+    )}
+  </div>
+</>
+
       )}
     </div>
+    
   );
 }

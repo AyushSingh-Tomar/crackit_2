@@ -23,10 +23,9 @@ import {
 } from "@/components/ui/select";
 import UserInfo from "@/components/UserInfo";
 import { Loader2Icon, XIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
 import MeetingCard from "@/components/MeetingCard";
-
+import Calendar from "@/components/Calendar";
 function InterviewScheduleUI() {
   const client = useStreamVideoClient();
   const { user } = useUser();
@@ -235,13 +234,20 @@ function InterviewScheduleUI() {
                 {/* CALENDAR */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Date</label>
-                  <Calendar
+                  {/* <Calendar
                     mode="single"
                     selected={formData.date}
                     onSelect={(date) => date && setFormData({ ...formData, date })}
                     disabled={(date) => date < new Date()}
                     className="rounded-md border"
-                  />
+                  /> */}
+                  <Calendar
+  selected={formData.date}
+  onSelect={(date) => date && setFormData({ ...formData, date })}
+  disabled={{ before: new Date() }} // Disable past dates
+  className="rounded-md border"
+/>
+
                 </div>
 
                 {/* TIME */}
