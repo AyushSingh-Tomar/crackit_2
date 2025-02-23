@@ -22,7 +22,7 @@ export default function Home() {
   const {name} = useUserRole();
   const handleQuickAction = (title: string) => {
     switch (title) {
-      case "New Call":
+      case "New Meet":
         setModalType("start");
         setShowModal(true);
         break;
