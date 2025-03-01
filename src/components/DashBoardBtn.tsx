@@ -10,15 +10,9 @@ function DashboardBtn() {
 
   if (isCandidate || isLoading) return null;
   
-    const router = useRouter();
-  
-    const goToDashboard = () => {
-      router.push('/dashboard');
-    };
   return (
     <Link href={"/dashboard"}>
-      <Button className="gap-2 font-medium" size={"sm"}
-      onClick={goToDashboard}>
+      <Button className="gap-2 font-medium" size={"sm"}>
         <LayoutDashboard className="size-4" />
         Dashboard
       </Button>
