@@ -45,3 +45,20 @@ export const getUserByClerkId = query({
     return user;
   },
 });
+export const changeUserRole = mutation({
+  args: {
+    clerkId: v.string(),
+    newRole: v.union(v.literal("candidate"), v.literal("interviewer")),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
+      .first();
+
+    if (!user) throw new Error("User not found");
+
+    await ctx.db.patch(user._id, { role: args.newRole=="interviewer"?"interviewer":"candidate" });
+    return { message: "Role updated successfully!" };
+  },
+});

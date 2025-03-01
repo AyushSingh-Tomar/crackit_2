@@ -13,6 +13,7 @@ export const useUserRole = () => {
 
   return {
     isLoading,
+    c_Id:userData?.clerkId,
     name:userData?.name,
     isInterviewer: userData?.role === "interviewer",
     isCandidate: userData?.role === "candidate",

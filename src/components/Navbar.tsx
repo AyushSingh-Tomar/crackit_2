@@ -1,10 +1,14 @@
 import Link from "next/link";
+
 import { ModeToggle } from "./ModeToggle";
 import { UserCheck } from "lucide-react";
 import { SignedIn, UserButton } from "@clerk/nextjs";
+import UserRoleSwitcher from "./roleButton";
 import DashboardBtn from "./DashBoardBtn";
 
 function Navbar() {
+
+
   return (
     <nav className="border-b">
       <div className="flex h-16 items-center px-4 container mx-auto">
@@ -22,6 +26,7 @@ function Navbar() {
         {/* RIGHT SIDE - ACTIONS */}
         <SignedIn>
           <div className="flex items-center space-x-4 ml-auto">
+          <UserRoleSwitcher />
             <DashboardBtn />
             <ModeToggle />
             <UserButton />
